@@ -1,0 +1,6 @@
+* Thu Nov 30 2017 Raine Mäkeläinen <raine.makelainen@jolla.com> - 1.2.0-2
+- Fix 1.2.0 obs build. Contributes to JB#39820
+
+* Thu Mar 18 2010 Carsten Munk <carsten@maemo.org> - 1.2.0-1
+- Don't rely on pth, fixes ARM build.
+
