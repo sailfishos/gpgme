@@ -50,8 +50,6 @@ Requires(postun): /sbin/install-info
 %build
 %configure \
   --disable-static \
-  --with-gpg-version=2.0.9 \
-  --with-gpgsm-version=2.0.9  \
   --with-gpg=%{_bindir}/gpg2 --disable-gpg-test
 
 make %{?_smp_mflags}
