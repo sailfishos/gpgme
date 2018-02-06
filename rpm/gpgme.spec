@@ -7,14 +7,15 @@ Release: 2
 License: LGPLv2+
 Group:   Applications/System
 URL:     http://www.gnupg.org/related_software/gpgme/
-Source0: ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-%{version}.tar.bz2
-Source1: ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-%{version}.tar.bz2.sig
-
-Patch1: gpgme-1.1.3-config_extras.patch
+Source0: %{name}-%{version}.tar.gz
 
 BuildRequires: gawk
 BuildRequires: gnupg2
 BuildRequires: libgpg-error-devel
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool
+BuildRequires: texinfo
 #BuildRequires: pth-devel
 
 Requires: gnupg2
@@ -38,7 +39,7 @@ Requires(postun): /sbin/install-info
 %{summary}
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}/%{name}/trunk
 
 #%patch1 -p1 -b .config_extras
 
@@ -48,7 +49,9 @@ Requires(postun): /sbin/install-info
 #sed -i -e 's|^libdir=@libdir@$|libdir=@exec_prefix@/lib|g' gpgme/gpgme-config.in
 
 %build
+autoreconf -vfi
 %configure \
+  --enable-maintainer-mode \
   --disable-static \
   --with-gpg=%{_bindir}/gpg2 --disable-gpg-test
 
@@ -86,12 +89,12 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING* README* THANKS VERSION
+%doc COPYING*
 %{_libdir}/libgpgme*.so.*
 
 %files devel
 %defattr(-,root,root,-)
-%doc ChangeLog NEWS TODO
+%doc AUTHORS ChangeLog NEWS TODO README* THANKS
 %{_bindir}/gpgme-config
 %{_includedir}/*
 %{_libdir}/libgpgme*.so
