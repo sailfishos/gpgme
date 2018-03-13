@@ -1,0 +1,3 @@
+[submodule "gpgme"]
+	path = gpgme
+	url = git://git.gnupg.org/gpgme.git
