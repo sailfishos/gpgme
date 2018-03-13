@@ -80,11 +80,11 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post devel
-%install_info  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz
+%install_info  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz ||:
 
 %postun devel
 if [ $1 -eq 0 ] ; then
-  %install_info_delete  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz
+  %install_info_delete  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz ||:
 fi
 
 %files
