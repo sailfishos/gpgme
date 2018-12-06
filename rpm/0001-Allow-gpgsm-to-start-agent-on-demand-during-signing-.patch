@@ -1,0 +1,27 @@
+From 3a8c7bfc4fe2a0d22b0f8126ae47803acd636b71 Mon Sep 17 00:00:00 2001
+From: Damien Caliste <dcaliste@free.fr>
+Date: Thu, 6 Dec 2018 16:35:10 +0100
+Subject: [PATCH] Allow gpgsm to start agent on demand during signing process,
+ backport from 1.6.0.
+
+---
+ trunk/src/engine-gpgsm.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/trunk/src/engine-gpgsm.c b/trunk/src/engine-gpgsm.c
+index 71ef221..802c1f0 100644
+--- a/trunk/src/engine-gpgsm.c
++++ b/trunk/src/engine-gpgsm.c
+@@ -1804,7 +1804,8 @@ gpgsm_sign (void *engine, gpgme_data_t in, gpgme_data_t out,
+ 
+           strcpy (stpcpy (buf, "SIGNER "), s);
+           err = gpgsm_assuan_simple_command (gpgsm->assuan_ctx, buf,
+-                                             NULL, NULL);
++                                             gpgsm->status.fnc,
++                                             gpgsm->status.fnc_value);
+ 	}
+       else
+         err = gpg_error (GPG_ERR_INV_VALUE);
+-- 
+2.7.4
+
