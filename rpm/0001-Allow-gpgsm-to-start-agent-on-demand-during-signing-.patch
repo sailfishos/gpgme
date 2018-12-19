@@ -5,13 +5,13 @@ Subject: [PATCH] Allow gpgsm to start agent on demand during signing process,
  backport from 1.6.0.
 
 ---
- trunk/src/engine-gpgsm.c | 3 ++-
+ src/engine-gpgsm.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/trunk/src/engine-gpgsm.c b/trunk/src/engine-gpgsm.c
+diff --git a/src/engine-gpgsm.c b/src/engine-gpgsm.c
 index 71ef221..802c1f0 100644
---- a/trunk/src/engine-gpgsm.c
-+++ b/trunk/src/engine-gpgsm.c
+--- a/src/engine-gpgsm.c
++++ b/src/engine-gpgsm.c
 @@ -1804,7 +1804,8 @@ gpgsm_sign (void *engine, gpgme_data_t in, gpgme_data_t out,
  
            strcpy (stpcpy (buf, "SIGNER "), s);
