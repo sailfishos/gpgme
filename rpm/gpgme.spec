@@ -9,6 +9,8 @@ Group:   Applications/System
 URL:     http://www.gnupg.org/related_software/gpgme/
 Source0: %{name}-%{version}.tar.gz
 
+Patch1: 0001-Allow-gpgsm-to-start-agent-on-demand-during-signing-.patch
+
 BuildRequires: gawk
 BuildRequires: gnupg2
 BuildRequires: libgpg-error-devel
@@ -40,8 +42,7 @@ Requires(postun): /sbin/install-info
 
 %prep
 %setup -q -n %{name}-%{version}/%{name}/trunk
-
-#%patch1 -p1 -b .config_extras
+%patch1 -p1
 
 ## HACK ALERT
 # The config script already suppresses the -L if it's /usr/lib, so cheat and
