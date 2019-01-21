@@ -1,8 +1,7 @@
-
 Name:    gpgme
 Summary: GnuPG Made Easy - high level crypto API
 Version: 1.2.0
-Release: 2
+Release: 0
 
 License: LGPLv2+
 Group:   Applications/System
@@ -35,10 +34,19 @@ Requires: %{name} = %{version}-%{release}
 Requires: libgpg-error-devel
 # /usr/share/aclocal ownership
 #Requires: automake
-Requires(post): /sbin/install-info
-Requires(postun): /sbin/install-info
+
 %description devel
 %{summary}
+
+%package doc
+Summary:   Documentation for %{name}
+Group:     Documentation
+Requires:  %{name} = %{version}-%{release}
+Requires(post): /sbin/install-info
+Requires(postun): /sbin/install-info
+
+%description doc
+Info pages for %{name}.
 
 %prep
 %setup -q -n %{name}-%{version}/%{name}/trunk
@@ -68,6 +76,10 @@ rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/common-lisp/source/gpgme/
 
+mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
+        AUTHORS ChangeLog NEWS README* THANKS TODO
+
 %check
 # expect 1(+?) errors with gnupg < 1.2.4
 # gpgme-1.1.6 includes one known failure (FAIL: t-sign)
@@ -80,24 +92,26 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -p /sbin/ldconfig
 
-%post devel
+%post doc
 %install_info  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz ||:
 
-%postun devel
+%postun doc
 if [ $1 -eq 0 ] ; then
   %install_info_delete  --info-dir=%{_infodir} %{_infodir}/%{name}.info.gz ||:
 fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING*
+%license COPYING*
 %{_libdir}/libgpgme*.so.*
 
 %files devel
 %defattr(-,root,root,-)
-%doc AUTHORS ChangeLog NEWS TODO README* THANKS
 %{_bindir}/gpgme-config
 %{_includedir}/*
 %{_libdir}/libgpgme*.so
 %{_datadir}/aclocal/gpgme.m4
-%{_infodir}/gpgme.info*
+
+%files doc
+%{_infodir}/%{name}.*
+%{_docdir}/%{name}-%{version}
