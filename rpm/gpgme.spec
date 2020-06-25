@@ -16,7 +16,7 @@ BuildRequires: libgpg-error-devel
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
-BuildRequires: texinfo
+#BuildRequires: texinfo
 #BuildRequires: pth-devel
 
 Requires: gnupg2
