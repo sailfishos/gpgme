@@ -5,7 +5,7 @@ Release: 0
 
 License: LGPLv2+
 Group:   Applications/System
-URL:     http://www.gnupg.org/related_software/gpgme/
+URL:     https://github.com/sailfishos/gpgme
 Source0: %{name}-%{version}.tar.gz
 
 Patch1: 0001-Allow-gpgsm-to-start-agent-on-demand-during-signing-.patch
