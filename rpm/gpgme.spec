@@ -4,8 +4,7 @@ Version: 1.2.0
 Release: 0
 
 License: LGPLv2+
-Group:   Applications/System
-URL:     http://www.gnupg.org/related_software/gpgme/
+URL:     https://github.com/sailfishos/gpgme
 Source0: %{name}-%{version}.tar.gz
 
 Patch1: 0001-Allow-gpgsm-to-start-agent-on-demand-during-signing-.patch
@@ -29,7 +28,6 @@ management.
 
 %package devel
 Summary:  Development headers and libraries for %{name}
-Group:    Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: libgpg-error-devel
 # /usr/share/aclocal ownership
@@ -40,7 +38,6 @@ Requires: libgpg-error-devel
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 Requires(post): /sbin/install-info
 Requires(postun): /sbin/install-info
