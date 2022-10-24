@@ -1,4 +1,4 @@
-From 3a8c7bfc4fe2a0d22b0f8126ae47803acd636b71 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Damien Caliste <dcaliste@free.fr>
 Date: Thu, 6 Dec 2018 16:35:10 +0100
 Subject: [PATCH] Allow gpgsm to start agent on demand during signing process,
@@ -9,7 +9,7 @@ Subject: [PATCH] Allow gpgsm to start agent on demand during signing process,
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/src/engine-gpgsm.c b/src/engine-gpgsm.c
-index 71ef221..802c1f0 100644
+index 71ef221ba42510a3d33b8b3af8e1fc60b3711bec..802c1f0a6af968a166448586d338bc75815d7313 100644
 --- a/src/engine-gpgsm.c
 +++ b/src/engine-gpgsm.c
 @@ -1804,7 +1804,8 @@ gpgsm_sign (void *engine, gpgme_data_t in, gpgme_data_t out,
@@ -22,6 +22,3 @@ index 71ef221..802c1f0 100644
  	}
        else
          err = gpg_error (GPG_ERR_INV_VALUE);
--- 
-2.7.4
-

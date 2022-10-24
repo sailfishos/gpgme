@@ -8,6 +8,7 @@ URL:     https://github.com/sailfishos/gpgme
 Source0: %{name}-%{version}.tar.gz
 
 Patch1: 0001-Allow-gpgsm-to-start-agent-on-demand-during-signing-.patch
+Patch2: 0002-doc-Update-gpl.texi-to-match-version-from-gnupg.patch
 
 BuildRequires: gawk
 BuildRequires: gnupg2
@@ -46,8 +47,7 @@ Requires(postun): /sbin/install-info
 Info pages for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}/trunk
-%patch1 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}/trunk
 
 ## HACK ALERT
 # The config script already suppresses the -L if it's /usr/lib, so cheat and
@@ -61,12 +61,10 @@ autoreconf -vfi
   --disable-static \
   --with-gpg=%{_bindir}/gpg2 --disable-gpg-test
 
-make %{?_smp_mflags}
+%make_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
 # unpackaged files
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
