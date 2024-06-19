@@ -9,6 +9,7 @@ Source0: %{name}-%{version}.tar.gz
 
 Patch1: 0001-Allow-gpgsm-to-start-agent-on-demand-during-signing-.patch
 Patch2: 0002-doc-Update-gpl.texi-to-match-version-from-gnupg.patch
+Patch3: 0003-configure.ac-Make-largefile-check-more-robust.patch
 
 BuildRequires: gawk
 BuildRequires: gnupg2
@@ -80,9 +81,6 @@ install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
 # gpgme-1.1.6 includes one known failure (FAIL: t-sign)
 make -C tests check ||:
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -96,12 +94,10 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %files
-%defattr(-,root,root,-)
 %license COPYING*
 %{_libdir}/libgpgme*.so.*
 
 %files devel
-%defattr(-,root,root,-)
 %{_bindir}/gpgme-config
 %{_includedir}/*
 %{_libdir}/libgpgme*.so
